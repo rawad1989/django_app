@@ -1,0 +1,103 @@
+from .base import *
+
+DEBUG = True
+ALLOWED_HOSTS = ['localhost', '192.168.1.112', '127.0.0.1', ]
+
+#DATABASE_URL = "mysql://school_user_dev:school@2021@148.66.137.21/school_dev"
+DATABASE_URL = 'sqlite:///db'
+SECRET_KEY = 'g3tuabwfj#to!324536n677nfr^!2k@o6!6+zt7pjcvg&nrwuvnk!_4o r'
+
+
+DATABASES = {
+    'default': dj_database_url.parse(DATABASE_URL),
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'root': {
+        'level': 'INFO',
+        'handlers': ['mail_admins', ],
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(filename)s %(funcName)s %(process)d %(thread)d %(threadName)s %(message)s',
+        },
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+    },
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false', ],
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'console': {
+            'level': 'ERROR',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+            'stream': sys.stdout,
+        },
+        'rq_console': {
+            'level': 'WARNING',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+            'stream': sys.stdout,
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['null'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+        'django.request': {
+            'handlers': ['mail_admins',],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'rq.worker': {
+            'handlers': ['rq_console',],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'django.security.DisallowedHost': {
+            'handlers': ['null', ],
+            'propagate': False,
+        },
+    },
+}
+
+
+RQ_QUEUES = {
+    'default': {
+        'URL': os.getenv('REDIS_URL', 'redis://localhost:6379/0'),
+        'DEFAULT_TIMEOUT': 500,
+        'USE_REDIS_CACHE': 'default',
+        'ASYNC': True,
+    },
+    'high': {
+        'URL': os.getenv('REDIS_URL', 'redis://localhost:6379/0'),
+        'DEFAULT_TIMEOUT': 500,
+        'USE_REDIS_CACHE': 'default',
+        'ASYNC': True,
+    },
+    'low': {
+        'URL': os.getenv('REDIS_URL', 'redis://localhost:6379/0'),
+        'DEFAULT_TIMEOUT': 500,
+        'USE_REDIS_CACHE': 'default',
+        'ASYNC': True,
+    },
+}
