@@ -1,0 +1,14 @@
+.idea/*
+.vscode/*
+local.py
+*__pycache__*
+__pycache__/*
+*/__pycache__/*
+*/*/__pycache__/*
+*__pycache__*
+tmp/*
+.static/*
+media/*
+venv/*
+.env
+db

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+        <table border="1">
+        <thead>
+            <tr>
+                <td>
+                    Username
+                </td>
+                <td>
+                    Email
+                </td>
+                <td>
+                    Is Staff
+                </td>
+                <td>
+                    Is Active
+                </td>
+            </tr>
+        </thead>
+            {% for user in users %}
+                <td>
+                     {{ user.username }}
+                </td>
+                <td>
+                     {{ user.email }}
+                </td>
+                <td>
+                     {{ user.is_staff }}
+                </td>
+                <td>
+                     {{ user.is_active }}
+                </td>
+            {% endfor %}
+    </table>
+
+
+</body>
+</html>
