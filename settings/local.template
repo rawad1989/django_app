@@ -3,7 +3,6 @@ from .base import *
 DEBUG = True
 ALLOWED_HOSTS = ['localhost', '192.168.1.112', '127.0.0.1', ]
 
-#DATABASE_URL = "mysql://school_user_dev:school@2021@148.66.137.21/school_dev"
 DATABASE_URL = 'sqlite:///db'
 SECRET_KEY = 'g3tuabwfj#to!324536n677nfr^!2k@o6!6+zt7pjcvg&nrwuvnk!_4o r'
 
